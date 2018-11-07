@@ -1,0 +1,276 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>zonotope documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-zonotope-s-documentation">
+<h1>Welcome to zonotope’s documentation!<a class="headerlink" href="#welcome-to-zonotope-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<span id="document-zonotope"></span><div class="section" id="module-zonotope">
+<span id="zonotope-module"></span><h2>zonotope module<a class="headerlink" href="#module-zonotope" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-7-zonotope-transformers">
+<h3>Exercise 7: Zonotope transformers<a class="headerlink" href="#exercise-7-zonotope-transformers" title="Permalink to this headline">¶</a></h3>
+<p><strong>Problem 1.</strong> Design a sound and precise ReLU transformer for zonotopes.</p>
+<p><strong>Problem 2.</strong> Prove the soundness of the transformer.</p>
+<p><strong>Problem 3.</strong> Implement in Python the following zonotope transformers:</p>
+<ol class="arabic simple">
+<li>Dot product with a constant vector:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Input: constants (c<sub>1</sub>, …, c<sub>n</sub>), zonotopes (z<sub>1</sub>, …, z<sub>n</sub>)</li>
+<li>Output: the zonotope c<sub>1</sub> z<sub>1</sub> + … + c<sub>n</sub> z<sub>n</sub></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Your ReLU transformer from Problem 1.</li>
+</ol>
+<p>You can use the provided template below.</p>
+<p><strong>Problem 4.</strong> Run the neural network from Exercise 6 with your zonotopes.</p>
+<dl class="class">
+<dt id="zonotope.ZonotopeContext">
+<em class="property">class </em><code class="descclassname">zonotope.</code><code class="descname">ZonotopeContext</code><span class="sig-paren">(</span><em>n=0</em><span class="sig-paren">)</span><a class="headerlink" href="#zonotope.ZonotopeContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Zonotope context.</p>
+<p>A zonotope context creates and transforms zonotopes.  Each zonotope is
+represented as a dictionary.  The items of the dictionary are pairs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index of a noise symbol and <code class="docutils literal notranslate"><span class="pre">a</span></code> is the respective
+coefficient for that noise symbol.  The free coefficient is represented
+as the noise symbol with index 0, that is the pair <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">a)</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of noise symbols in pre-existing zonotopes.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zonotope.ZonotopeContext.make">
+<code class="descname">make</code><span class="sig-paren">(</span><em>m</em>, <em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#zonotope.ZonotopeContext.make" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a zonotope.</p>
+<p>The zonotope is specified with two parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Midpoint.</p>
+</dd>
+<dt><strong>d</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Maximum distance from midpoint.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>zonotope</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">ZonotopeContext</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(0, 1.0), (1, 0.25)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="zonotope.ZonotopeContext.extrema">
+<code class="descname">extrema</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#zonotope.ZonotopeContext.extrema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute zonotope extrema.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">zonotope</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>float tuple</strong></dt>
+<dd><p class="first last">The minimum and the maximum.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">ZonotopeContext</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span><span class="o">.</span><span class="n">extrema</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="mf">14.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">})</span>
+<span class="go">(12.5, 15.5)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="zonotope.ZonotopeContext.dot">
+<code class="descname">dot</code><span class="sig-paren">(</span><em>C</em>, <em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#zonotope.ZonotopeContext.dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute dot product.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>C</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float list</span></dt>
+<dd></dd>
+<dt><strong>Z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">zonotope list</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>zonotope</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">ZonotopeContext</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="mf">2.0</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="mf">3.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">),</span>
+<span class="gp">... </span>     <span class="n">ctx</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">),</span>
+<span class="gp">... </span>     <span class="n">ctx</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(0, 14.0), (1, 0.25), (2, 0.5), (3, 0.75)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="zonotope.ZonotopeContext.relu">
+<code class="descname">relu</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#zonotope.ZonotopeContext.relu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute ReLU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">zonotope</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>zonotope</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">ZonotopeContext</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">relu</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="o">+</span><span class="mf">14.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">})</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(0, 14.0), (1, 0.25), (2, 0.5), (3, 0.75)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">relu</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mf">14.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">})</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(0, 0)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">relu</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="mf">0.000</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">})</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">*** TODO:IMPLEMENT ***</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html#document-index">zonotope</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-zonotope">zonotope module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html#document-index">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
