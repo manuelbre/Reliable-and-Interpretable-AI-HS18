@@ -21,6 +21,9 @@ You can use the provided template below.
 **Problem 4.** Run the neural network from Exercise 6 with your zonotopes.
 """
 
+from collections import defaultdict
+
+
 class ZonotopeContext:
     """Zonotope context.
 
@@ -64,6 +67,12 @@ class ZonotopeContext:
         >>> sorted(ctx.make(1.0, 0.25).items())
         [(0, 1.0), (1, 0.25)]
         """
+        assert d >= 0.0
+        z = defaultdict(float, {0: float(m)})
+        if d > 0:
+            self.n += 1
+            z[self.n] = float(d)
+        return z
 
     def extrema(self, z):
         """Compute zonotope extrema.
@@ -83,6 +92,15 @@ class ZonotopeContext:
         >>> ctx.extrema({0: 14.0, 1: 0.25, 2: 0.5, 3: 0.75})
         (12.5, 15.5)
         """
+        min = 0
+        max = 0
+        for k, v in z.items():
+            if k != 0:
+                min -= abs(v)
+                max += abs(v)
+                
+        return (z[0] + min, z[0] + max)
+        
 
     def dot(self, C, Z):
         """Compute dot product.
@@ -108,6 +126,13 @@ class ZonotopeContext:
         >>> sorted(ctx.dot(C, Z).items())
         [(0, 14.0), (1, 0.25), (2, 0.5), (3, 0.75)]
         """
+        zonotop = defaultdict(float)
+        assert len(C) == len(Z)
+        for c, z in zip(C, Z):
+            for k, v in z.items():
+                zonotop[k] += v*c
+                
+        return zonotop
 
     def relu(self, z):
         """Compute ReLU.
@@ -123,10 +148,23 @@ class ZonotopeContext:
         Examples
         --------
         >>> ctx = ZonotopeContext(3)
-        >>> sorted(ctx.relu({0: +14.0, 1: 0.25, 2: 0.5, 3: 0.75}).items())
+        >>> sorted(ctx.relu({0: 14.0, 1: 0.25, 2: 0.5, 3: 0.75}).items())
         [(0, 14.0), (1, 0.25), (2, 0.5), (3, 0.75)]
         >>> sorted(ctx.relu({0: -14.0, 1: 0.25, 2: 0.5, 3: 0.75}).items())
-        [(0, 0)]
+        [(0, 0.0)]
         >>> sorted(ctx.relu({0: 0.000, 1: 0.25, 2: 0.5, 3: 0.75}).items())
-        *** TODO:IMPLEMENT ***
+        [(0, 0.375), (1, 0.125), (2, 0.25), (3, 0.375), (4, 0.375)]
         """
+        assert isinstance(z, dict)
+        l, u = self.extrema(z)
+        
+        if u <= 0:
+            return self.make(0, 0)
+        
+        elif l > 0:
+            return z
+        
+        else:
+            m = (u)/(u-l)
+            b = -0.5 * m * l
+            return self.dot([m, b], [z, self.make(1.0, 1.0)])
