@@ -1,0 +1,10 @@
+def main(){
+  n := 40;
+  sum := 0;
+
+  for i in [0..n){
+    value := uniformInt(1, 6);
+    sum += value;
+    }
+  return sum/n > 4;
+}

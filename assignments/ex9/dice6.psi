@@ -1,0 +1,15 @@
+def main(){
+  n := 20;
+  sum := 0;
+  n_six := 0;
+
+  for i in [0..n){
+    value := uniformInt(1, 6);
+    sum += value;
+    if value == 6 {
+      n_six +=1;
+    }
+    }
+  observe(n_six >= 10);
+  return sum/n > 4
+}

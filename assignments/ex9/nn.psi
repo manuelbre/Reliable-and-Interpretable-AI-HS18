@@ -1,0 +1,24 @@
+def main() {
+  // Neural Network model
+
+  // Define parameters
+  location :=0;
+  scale :=1;
+
+  // Define variables
+  n := 2;
+  x := array(n, 1);
+
+  for i in [0..n){
+    x[i] = laplace(location, scale);
+  }
+
+  // Define Network
+  out := relu(-x[0] + x[1] + 2) + relu(x[0] - 2*x[1]);
+  out = relu(out);
+  return out;
+}
+
+def relu(a){
+  return max(0, a);
+}

@@ -1,0 +1,9 @@
+def main(){
+// Distribution with expectation of pi.
+x := uniform(0,1);
+y := uniform(0,1);
+
+in_circle := x^2 + y ^2 <=1 ;
+return 4 * in_circle;
+
+}
