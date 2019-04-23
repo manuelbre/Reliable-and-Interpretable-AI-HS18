@@ -1,3 +1,6 @@
 [submodule "cheatsheet/Reliable-and-Interpretable-AI-Cheatsheet-HS18"]
 	path = cheatsheet/Reliable-and-Interpretable-AI-Cheatsheet-HS18
 	url = git@github.com:manuelbre/Reliable-and-Interpretable-AI-Cheatsheet-HS18.git
+[submodule "project/verify_neural_networks"]
+	path = project/verify_neural_networks
+	url = git@github.com:Mayankm96/verify_neural_networks.git
