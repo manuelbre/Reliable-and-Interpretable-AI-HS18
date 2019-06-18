@@ -11,7 +11,7 @@ ipython==7.0.1
 ipython-genutils==0.2.0
 ipywidgets==7.4.2
 jedi==0.12.1
-Jinja2==2.10
+Jinja2>=2.10.1
 jsonschema==2.6.0
 jupyter==1.0.0
 jupyter-client==5.2.3
@@ -47,7 +47,7 @@ pyparsing==2.2.2
 pyreadline==2.1
 python-dateutil==2.7.3
 pytz==2018.5
-PyYAML==3.13
+pyyaml>=4.2b1
 pyzmq==17.1.2
 qtconsole==4.4.1
 scikit-learn==0.20.0
